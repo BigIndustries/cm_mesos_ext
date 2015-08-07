@@ -3,7 +3,7 @@ This is a package that contains the the open source procjects Apache Mesos, Mara
 The parcel takes care of the resource management and scheduling of different distributed applications which run in the same cluster. 
 The applications are containerized with Docker.
 
-We also provide ready-to-use Parcels for EL6, see the [Alternative section](#alternative).
+We also provide ready-to-use Parcels for EL6, see the [Alternative section](https://github.com/BigIndustries/cm_mesos_ext#alternative-link-to-existing-premade-parcels).
 
 # Steps
 * Build a Cloudera parcel containing Apache Mesos, Marathon and Chronos 
