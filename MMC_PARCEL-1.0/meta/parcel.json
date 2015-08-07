@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "name": "MESOS",
+  "version": "1.0",
+  "setActiveSymlink": true,
+
+  "depends": "",
+  "replaces": "MESOS",
+  "conflicts": "",
+
+  "provides": [
+    "mesos"
+  ],
+
+  "scripts": {
+    "defines": "mesos_env.sh"
+  },
+
+  "packages": [
+    { "name"   : "mesos",
+      "version": "1.0"
+    }
+  ],
+
+  "components": [
+    { "name"       : "mesos",
+      "version"    : "1.0",
+      "pkg_version": "1.0"
+    }
+  ],
+
+  "users": {
+    "mesos": {
+      "longname"    : "MESOS User",
+      "home"        : "/var/lib/mesos",
+      "shell"       : "/bin/bash",
+      "extra_groups": [ "docker" ]
+    }
+  },
+  "groups": [
+    "mesos", "docker"
+  ]
+}

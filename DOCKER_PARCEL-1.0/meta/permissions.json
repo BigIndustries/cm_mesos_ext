@@ -1,0 +1,12 @@
+{
+  "bin": {
+    "user": "docker",
+    "group": "docker",
+    "permissions": "0774"
+  },
+  "bin/docker": {
+    "user": "docker",
+    "group": "docker",
+    "permissions": "0774"
+  }
+}

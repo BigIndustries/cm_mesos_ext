@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>DOCKER</groupId>
+    <artifactId>DOCKER</artifactId>
+    <version>1.0</version>
+
+    <build>
+    <plugins>
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+            <execution>
+                <id>antrunner 1:dl jar</id>
+                <phase>generate-resources</phase>
+
+                <configuration>
+                    <target>
+                        <mkdir dir="${project.build.directory}/bin" />
+                        <copy todir="${project.build.directory}/bin">
+                            <fileset dir="${basedir}/docker"/>
+                    </copy>
+                    </target>
+                </configuration>
+                <goals>
+                    <goal>run</goal>
+                </goals>
+            </execution>
+
+            <execution>
+                <id>antrunner step3: rename to parcel</id>
+                <phase>package</phase>
+
+                <configuration>
+                    <target>
+                        <move file="target/DOCKER-${project.version}.tar.gz" tofile="target/DOCKER-${project.version}-el6.parcel" />
+                        <exec executable="${basedir}/scripts/makemanifest.sh">
+                            <arg value="${basedir}"/>
+                        </exec>
+
+                    </target>
+
+                </configuration>
+                <goals>
+                    <goal>run</goal>
+                </goals>
+            </execution>
+        </executions>
+    </plugin>
+    <!--STEP2:-->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>2.5.2</version> <!-- Old -->
+            <executions>
+                <execution>  <!-- Build tar.gz archive. -->
+                    <id>tar</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                    <configuration>
+                        <descriptors>
+                            <descriptor>src/main/assembly/tar.xml</descriptor>
+                        </descriptors>
+                        <finalName>DOCKER-${project.version}</finalName>
+
+                        <appendAssemblyId>false</appendAssemblyId>
+                    </configuration>
+                </execution>  <!-- /NewStuff -->
+                <execution>  <!-- Build tar.gz archive. -->
+                    <id>jar</id>
+                    <phase>prepare-package</phase>
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                    <configuration>
+                        <descriptors>
+                            <descriptor>src/main/assembly/jar.xml</descriptor>
+                        </descriptors>
+                        <finalName>DOCKER-${project.version}</finalName>
+                        <appendAssemblyId>false</appendAssemblyId>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+
+
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.2.1</version>
+            <executions>
+                <execution>
+                    <id>validate parcel</id>
+                    <phase>verify</phase>
+                    <goals>
+                        <goal>exec</goal>
+                    </goals>
+                    <configuration>
+                        <executable>java</executable>
+                        <arguments>
+                            <argument>-jar</argument>
+                            <argument>../validator.jar</argument>
+                            <argument>-f</argument>
+                            <argument>"${basedir}/target/DOCKER-${project.version}-el6.parcel"</argument>
+                        </arguments>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>validate manifest</id>
+                    <phase>verify</phase>
+                    <goals>
+                        <goal>exec</goal>
+                    </goals>
+                    <configuration>
+                        <executable>java</executable>
+                        <arguments>
+                            <argument>-jar</argument>
+                            <argument>../validator.jar</argument>
+                            <argument>-m</argument>
+                            <argument>"${basedir}/target/manifest.json"</argument>
+                        </arguments>
+                    </configuration>
+                </execution>
+                <execution>
+                    <id>validate sdl</id>
+                    <phase>verify</phase>
+                    <goals>
+                        <goal>exec</goal>
+                    </goals>
+                    <configuration>
+                        <executable>java</executable>
+                        <arguments>
+                            <argument>-jar</argument>
+                            <argument>../validator.jar</argument>
+                            <argument>-s</argument>
+                            <argument>"${basedir}/csd/descriptor/service.sdl"</argument>
+                        </arguments>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+    </build>
+</project>

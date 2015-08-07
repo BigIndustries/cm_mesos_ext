@@ -1,0 +1,8 @@
+{
+  "docker": {
+    "destination": "/usr/bin/docker",
+    "source": "bin/docker",
+    "priority": 10,
+    "isDirectory": false
+  }
+}

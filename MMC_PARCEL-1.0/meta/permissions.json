@@ -1,0 +1,107 @@
+{
+  "bin": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/mesos": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/mesos/libexec": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/mesos/libexec/mesos": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/mesos/libexec/mesos/mesos-containerizer": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/mesos/libexec/mesos/mesos-executor": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/mesos/libexec/mesos/mesos-fetcher": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/mesos/libexec/mesos/mesos-health-check": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/mesos/libexec/mesos/mesos-usage": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/mesos/log": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/mesos/sbin": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/mesos/sbin/mesos-master": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/mesos/sbin/mesos-slave": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/marathon": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/marathon/bin": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/marathon/bin/start": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/chronos": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/chronos/bin": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/chronos/bin/start-chronos.bash": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/work_dir": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "bin/work_dir/mesos": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  }
+}

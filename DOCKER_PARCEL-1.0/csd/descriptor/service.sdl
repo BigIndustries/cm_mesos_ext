@@ -1,0 +1,42 @@
+{
+    "name": "DOCKER",
+    "label": "Docker",
+    "description": "Docker is an open platform for developers and sysadmins to build, ship, and run distributed applications. ",
+    "version": "1.0",
+    "icon": "images/icon.png",
+    "parcel": {
+        "requiredTags": [
+            "docker"
+        ]
+    },
+    "runAs": {
+        "user": "root",
+        "group": "root"
+    },
+    "roles": [
+        {
+            "name": "DOCKER_DAEMON",
+            "label": "Docker daemon",
+            "pluralLabel": "Docker daemons",
+            "parameters": [
+                            {
+                                "name": "insecure_registry",
+                                "label": "Registry ip and port",
+                                "description": "The ip and port the registry listens on",
+                                "required": "true",
+                                "type": "uri",
+                                "default": "127.0.0.1:31000"
+                            }
+                        ],
+            "startRunner": {
+                "program": "scripts/script.sh",
+                "args": [
+                    "start"
+                ],
+                "environmentVariables":{
+                    "DOCKER_REGISTRY":"${insecure_registry}"
+                }
+            }
+        }
+    ]
+}

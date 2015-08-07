@@ -1,0 +1,46 @@
+<assembly>
+    <id>tar</id>
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+    <fileSets>
+        <!--<fileSet>-->
+            <!--<directory>target/data</directory>-->
+            <!--<outputDirectory>/data</outputDirectory>-->
+        <!--</fileSet>-->
+        <fileSet>
+            <directory>target/bin</directory>
+            <outputDirectory>/bin</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>meta</directory>
+            <outputDirectory>/meta</outputDirectory>
+        </fileSet>
+       <!--
+        <fileSet>  &lt;!&ndash; Non-scripts &ndash;&gt;
+            <directory>skel_unix</directory>
+            <outputDirectory>/</outputDirectory>
+            <excludes>
+                <exclude>**/*.command</exclude>
+                <exclude>**/*.sh</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>  &lt;!&ndash; Scripts &ndash;&gt;
+            <directory>skel_unix</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>**/*.command</include>
+                <include>**/*.sh</include>
+            </includes>
+            <fileMode>755</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${project.build.directory}</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>all-in-one.jar</include>
+            </includes>
+        </fileSet>-->
+    </fileSets>
+
+</assembly>
