@@ -185,7 +185,7 @@ In this part we are going to package a parcel containing Apache Mesos - Marathon
 ```
 #!bash
 		# clone repository from Git.
-        git clone .......
+        git clone https://github.com/BigIndustries/cm_mesos_ext.git
 		
 		# change directory
 		cd cm_mesos_ext/MMC_PARCEL-1.0
