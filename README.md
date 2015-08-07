@@ -21,7 +21,6 @@ This part explains the steps to build Apache Mesos - Marathon - Chronos from sou
 
 * Create a new file called `wandisco-svn.repo` in `/etc/yum.repos.d/`
 ```
-#!bash
         cd /etc/yum.repos.d/
         cat > wandisco-svn.repo
 ```
@@ -29,7 +28,6 @@ This part explains the steps to build Apache Mesos - Marathon - Chronos from sou
 * Place the following content in your created file `wandisco-svn.repo`
 
 ```
-#!bash
         [WandiscoSVN]
         name=Wandisco SVN Repo
         baseurl=http://opensource.wandisco.com/centos/6/svn-1.8/RPMS/$basearch/
@@ -40,7 +38,6 @@ This part explains the steps to build Apache Mesos - Marathon - Chronos from sou
 * Install the dependent packages for the build. This is very important because all the libraries are necessary for a successful build.
 
 ```
-#!bash
         sudo yum groupinstall -y "Development Tools"
         sudo yum install -y python-devel java-1.7.0-openjdk-devel zlib-devel libcurl-devel openssl-devel cyrus-sasl-devel cyrus-sasl-md5 apr-devel subversion-devel apr-utils-devel
         wget http://mirror.nexcess.net/apache/maven/maven-3/3.0.5/binaries/apache-maven-3.0.5-bin.tar.gz
@@ -57,7 +54,6 @@ This part explains the steps to build Apache Mesos - Marathon - Chronos from sou
 * We used mesos version 0.22.0
 
 ```
-#!bash
 		# download mesos-0.22.0 tarball
         wget http://archive.apache.org/dist/mesos/0.22.0/mesos-0.22.0.tar.gz
 		
@@ -129,7 +125,6 @@ For the full documentation on Apache Mesos please refer to [this](http://mesos.a
 ####1.2 Marathon
 
 ```
-#!bash
 		# get repo
         curl https://bintray.com/sbt/rpm/rpm | sudo tee /etc/yum.repos.d/bintray-sbt-rpm.repo
 		
@@ -161,7 +156,6 @@ These are the requirements to build and run Chronos. Please install nodeJS first
 * Maven 3+
 
 ```
-#!bash
 		# install NodeJs
 		sudo curl -sL https://rpm.nodesource.com/setup | bash -
 		sudo yum install -y nodejs
@@ -183,7 +177,6 @@ In this part we are going to package a parcel containing Apache Mesos - Marathon
 ####2.1 pull and create parcel directory
 
 ```
-#!bash
 		# clone repository from Git.
         git clone https://github.com/BigIndustries/cm_mesos_ext.git
 		
@@ -219,7 +212,6 @@ To package the parcels correctly `Python 2.7` and `Maven` must be installed. To 
 Make sure you are in the `mesos-integration/MMC_PARCEL-1.0/` directory.
 
 ```
-#!bash
 		# package with Maven
         mvn package
 ```
@@ -238,7 +230,6 @@ Make sure you are in the `mesos-integration/DOCKER_PARCEL-1.0/` directory.
 #### 3.1 Enter directory and package parcel
 
 ```		
-#!bash
 
 	    # package with Maven
         mvn package
@@ -268,7 +259,6 @@ For CM to pick up these files, the Cloudera Manager service needs to be restarte
 
 ```
        sudo service cloudera-scm-server restart
-
 ```
 
 Now you will be able to add the services to your cluster, just like you would I.e. HDFS, Hive, ...
