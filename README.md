@@ -3,7 +3,7 @@ This is a package that contains the open source projects Apache Mesos, Marathon 
 The parcel takes care of the resource management and scheduling of different distributed applications which run in the same cluster. 
 The applications are containerized with Docker.
 
-We also provide ready-to-use Parcels for EL6, see the [Alternative section](#alternative-link-to-existing-premade-parcels).
+We also provide ready-to-use Parcels for EL6 and Ubuntu 14.04 (Trusty), see the [Alternative section](#alternative-link-to-existing-premade-parcels).
 
 # Steps
 * Build a Cloudera parcel containing Apache Mesos, Marathon and Chronos 
@@ -12,6 +12,7 @@ We also provide ready-to-use Parcels for EL6, see the [Alternative section](#alt
 ## 0 Prerequisites
 
 - Zookeeper
+- Cgroups
 
 ## 1. Build Apache Mesos - Marathon - Chronos from open source
 
