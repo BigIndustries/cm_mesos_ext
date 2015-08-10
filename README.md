@@ -1,5 +1,5 @@
 # About this project
-This is a package that contains the the open source procjects Apache Mesos, Marathon and Chronos and provides those services as a Cloudera Manager Parcel that can be deployed and run on a Cloudera Hadoop Cluster. 
+This is a package that contains the open source projects Apache Mesos, Marathon and Chronos and provides those services as a Cloudera Manager Parcel that can be deployed and run on a Cloudera Hadoop Cluster. 
 The parcel takes care of the resource management and scheduling of different distributed applications which run in the same cluster. 
 The applications are containerized with Docker.
 
@@ -17,7 +17,7 @@ We also provide ready-to-use Parcels for EL6, see the [Alternative section](#alt
 
 This part explains the steps to build Apache Mesos - Marathon - Chronos from source with `CentOS 6.5`.
 
-*You can skip this part if you want to use our pre-build versions and go to step 2.*
+*You can skip this part if you want to use our pre-built versions and go to step 2.*
 
 ### 1.1 Apache Mesos
 
@@ -255,7 +255,7 @@ Now, one last step remains.
 
 The `<PARCEL>-<VERSION>.jar` file in the target directory of the parcels we've just build, contains the Service Descriptor (csd). This allows for services to be added to Cloudera Manager.
 
-These jar file(s) need to be added to the CSD directory on the CM host machine. By default this directory is located at `/opt/cloudera/csd`.
+These jar file(s) need to be added to the CSD directory on the CM host machine. By default, this directory is located at `/opt/cloudera/csd`.
 
 For CM to pick up these files, the Cloudera Manager service needs to be restarted.
 
