@@ -1,12 +1,12 @@
 # About this project
-This is a package that contains the open source projects Apache Mesos, Marathon and Chronos and provides those services as a Cloudera Manager Parcel that can be deployed and run on a Cloudera Hadoop Cluster. 
+This is a package that contains the open source projects Apache Mesos, Marathon and Mesos-DNS and provides those services as a Cloudera Manager Parcel that can be deployed and run on a Cloudera Hadoop Cluster. 
 The parcel takes care of the resource management and scheduling of different distributed applications which run in the same cluster. 
 The applications are containerized with Docker.
 
 We also provide ready-to-use Parcels for EL6 and Ubuntu 14.04 (Trusty), see the [Alternative section](#alternative-link-to-existing-premade-parcels).
 
 # Steps
-* Build a Cloudera parcel containing Apache Mesos, Marathon and Chronos 
+* Build a Cloudera parcel containing Apache Mesos, Marathon and Mesos-DNS 
 * Build a Cloudera parcel containing Docker
 
 #changelog v1.0 -> v1.1
@@ -45,9 +45,9 @@ Mesos-DNS supports service discovery in Apache Mesos clusters.
 - Zookeeper
 - Cgroups
 
-## 1. Build Apache Mesos - Marathon - Chronos from open source
+## 1. Build Apache Mesos - Marathon - Mesos-DNS from source
 
-This part explains the steps to build Apache Mesos - Marathon - Chronos from source with `CentOS 6.5`.
+This part explains the steps to build Apache Mesos - Marathon - Mesos-DNS from source with `CentOS 6.5`.
 
 *You can skip this part if you want to use our pre-built versions and go to step 2.*
 
@@ -180,33 +180,26 @@ For the full documentation on Apache Mesos please refer to [this](http://mesos.a
 ```
 For the full documentation on Marathon please refer to [this](https://mesosphere.github.io/marathon/docs/) link.
 
-####1.3 Chronos
+####1.3 Mesos-DNS
 
-These are the requirements to build and run Chronos. Please install nodeJS first.
+To build Mesos-DNS, you need to install go and godep on your machine. You must set the GOPATH environment variable to point to the directory where outside go packages will be installed. You must also add $GOPATH/bin to the PATH environment variable. If you install go to a custom location, you may need to set the GOROOT environment properly and add $GOROOT/bin to the PATH environment variable. For instance, you may need to do the following:
 
-* Apache Mesos 0.20.0+
-* Apache ZooKeeper
-* JDK 1.6+
-* Maven 3+
+	export GOPATH=$HOME/go
+	export PATH=$PATH:$GOPATH/bin
+	export GOROOT=/usr/local/go      # assuming go is installed at /usr/local/go
+	export PATH=$PATH:$GOROOT/bin
+	
+To build Mesos-DNS using godep: 
 
-```
-		# install NodeJs
-		sudo curl -sL https://rpm.nodesource.com/setup | bash -
-		sudo yum install -y nodejs
-		
-		# start up Zookeeper, Mesos master, and Mesos slave(s). Then try
-		export MESOS_NATIVE_LIBRARY=/usr/local/lib/libmesos.so
-		git clone https://github.com/mesos/chronos.git
-		cd chronos
-		mvn package
-		java -cp target/chronos*.jar org.apache.mesos.chronos.scheduler.Main --master zk://localhost:2181/mesos --zk_hosts localhost:2181
-```
+	go get github.com/mesosphere/mesos-dns
+	cd $GOPATH/src/github.com/mesosphere/mesos-dns
+	make all
 
-For the full documentation on Chronos please refer to [this](http://mesos.github.io/chronos/docs/)link.
+For more info on Mesos-DNS and the build process, refer to the [Mesos-DNS docs](http://mesosphere.github.io/mesos-dns/docs/)
 
-## 2 Package parcel containing Apache Mesos - Marathon - Chronos
+## 2 Package parcel containing Apache Mesos - Marathon - Mesos-DNS
 
-In this part we are going to package a parcel containing Apache Mesos - Marathon - Chronos.  
+In this part we are going to package a parcel containing Apache Mesos - Marathon - Mesos-DNS.  
 
 ####2.1 pull and create parcel directory
 
@@ -221,19 +214,19 @@ In this part we are going to package a parcel containing Apache Mesos - Marathon
 		mkdir fat_mesos
         cd fat_mesos
         mkdir mesos
-        mkdir chronos
+        mkdir mesos-dns
         mkdir marathon
 		
 		#create an extra work dir
 		mkdir work_dir
 		
-		The directory `MMC_PARCEL-1.1` should now have a folder `fat_mesos` with 3 subfolders `mesos`, `marathon`, `chronos` and `work_dir`.
+		The directory `MMC_PARCEL-1.1` should now have a folder `fat_mesos` with 3 subfolders `mesos`, `marathon`, `mesos-dns` and `work_dir`.
 
         MMC_PARCEL-1.1
             └── fat_mesos
                 ├── mesos
                 ├── marathon
-                └── chronos
+                └── mesos-dns
 				
 Please place the built files from step 1 in the corresponding folders.
 
