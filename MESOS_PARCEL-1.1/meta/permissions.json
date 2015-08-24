@@ -1,0 +1,113 @@
+{
+  "opt": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/mesos": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/mesos/libexec": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/mesos/libexec/mesos": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/mesos/libexec/mesos/mesos-containerizer": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/mesos/libexec/mesos/mesos-executor": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/mesos/libexec/mesos/mesos-fetcher": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/mesos/libexec/mesos/mesos-health-check": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/mesos/libexec/mesos/mesos-usage": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/mesos/log": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/mesos/sbin": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/mesos/sbin/mesos-master": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/mesos/sbin/mesos-slave": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/marathon": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/marathon/bin": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/marathon/bin/start": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/work_dir": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/work_dir/mesos": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/mesos-dns/mesos-dns-config.json": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/mesos-dns/": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/mesos-dns/template-mesos-dns-config.json": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  },
+  "opt/mesos-dns/mesos-dns": {
+    "user": "mesos",
+    "group": "mesos",
+    "permissions": "4754"
+  }
+
+}

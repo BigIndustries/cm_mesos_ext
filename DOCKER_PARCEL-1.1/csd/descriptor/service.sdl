@@ -1,0 +1,53 @@
+{
+    "name": "DOCKER",
+    "label": "Docker",
+    "description": "Docker is an open platform for developers and sysadmins to build, ship, and run distributed applications. ",
+    "version": "1.1",
+    "icon": "images/icon.png",
+    "parcel": {
+        "requiredTags": [
+            "docker"
+        ]
+    },
+    "runAs": {
+        "user": "root",
+        "group": "root"
+    },
+    "roles": [
+        {
+            "name": "DOCKER_DAEMON",
+            "label": "Docker daemon",
+            "pluralLabel": "Docker daemons",
+            "parameters": [
+                            {
+                                "name": "insecure_registry",
+                                "label": "Registry ip and port",
+                                "description": "The ip and port the registry listens on",
+                                "required": "true",
+                                "type": "string",
+                                "default": "127.0.0.1:31000",
+                                "configurableInWizard" : true
+                            },
+                            {
+                                "name": "docker_conf_graph",
+                                "label": "Graph",
+                                "description": "The Path to use as the root of the Docker runtime. Default is /var/lib/docker. (can be left empty)",
+                                "required": "false",
+                                "type": "string",
+                                "default": "/var/lib/docker",
+                                "configurableInWizard" : true
+                            }
+                        ],
+            "startRunner": {
+                "program": "scripts/script.sh",
+                "args": [
+                    "start"
+                ],
+                "environmentVariables":{
+                    "DOCKER_REGISTRY":"${insecure_registry}",
+                    "DOCKER_CONF_GRAPH":"${docker_conf_graph}"
+                }
+            }
+        }
+    ]
+}

@@ -9,6 +9,37 @@ We also provide ready-to-use Parcels for EL6 and Ubuntu 14.04 (Trusty), see the 
 * Build a Cloudera parcel containing Apache Mesos, Marathon and Chronos 
 * Build a Cloudera parcel containing Docker
 
+#changelog v1.0 -> v1.1
+
+##Docker Parcel
+
+- '-g,  --graph' flag can now be set through Cloudera Manager. This sets the path to use as the root of the Docker runtime.
+- 'Registry ip and port' can now be set without URI validation warning.
+
+##Mesos Parcel
+
+- Renamed from MMC to MESOS.
+
+###General
+
+- More configuration options are now available on deployment.
+- Tested on CDH 5.4.5
+
+##Chronos
+
+- Removed Chronos from the parcel, this can be run on Mesos via Marathon instead.
+
+##Marathon
+
+- Moved up to version 0.9 (in the pre-build parcels and tests).
+
+##Mesos DNS
+
+Mesos-DNS supports service discovery in Apache Mesos clusters. 
+
+- [added Mesos DNS](https://mesosphere.github.io/mesos-dns/) to the parcel.
+
+
 ## 0 Prerequisites
 
 - Zookeeper
@@ -134,15 +165,15 @@ For the full documentation on Apache Mesos please refer to [this](http://mesos.a
 		# install sbt
 		sudo yum install sbt
 		
-		# download marathon-0.8.1 tarball 
-		# marathon version 0.8.1 was used for this project
-		wget https://downloads.mesosphere.io/marathon/v0.8.1/marathon-0.8.1.tgz
+		# download marathon-0.9 tarball 
+		# marathon version 0.9 was used for this project
+		wget http://downloads.mesosphere.com/marathon/v0.9.0/marathon-0.9.0.tgz
 		
 		# extract the tar file
-		tar xvf marathon-0.8.1.tgz
+		tar xvf marathon-0.9.0.tgz
 		
 		# change the working directory
-		cd marathon-0.8.1
+		cd marathon-0.9.0
 		
 		# build
 		sbt assembly
@@ -184,9 +215,9 @@ In this part we are going to package a parcel containing Apache Mesos - Marathon
         git clone https://github.com/BigIndustries/cm_mesos_ext.git
 		
 		# change directory
-		cd cm_mesos_ext/MMC_PARCEL-1.0
+		cd cm_mesos_ext/MMC_PARCEL-1.1
 		
-		# create the folders for the build files from step 1 in `mesos-integration/MMC_PARCEL-1.0/`
+		# create the folders for the build files from step 1 in `mesos-integration/MMC_PARCEL-1.1/`
 		mkdir fat_mesos
         cd fat_mesos
         mkdir mesos
@@ -196,9 +227,9 @@ In this part we are going to package a parcel containing Apache Mesos - Marathon
 		#create an extra work dir
 		mkdir work_dir
 		
-		The directory `MMC_PARCEL-1.0` should now have a folder `fat_mesos` with 3 subfolders `mesos`, `marathon`, `chronos` and `work_dir`.
+		The directory `MMC_PARCEL-1.1` should now have a folder `fat_mesos` with 3 subfolders `mesos`, `marathon`, `chronos` and `work_dir`.
 
-        MMC_PARCEL-1.0
+        MMC_PARCEL-1.1
             └── fat_mesos
                 ├── mesos
                 ├── marathon
@@ -212,23 +243,23 @@ Please place the built files from step 1 in the corresponding folders.
 
 To package the parcels correctly `Python 2.7` and `Maven` must be installed. To know how to install `Python 2.7` on CentOS 6.5 refer to this [link](https://github.com/h2oai/h2o/wiki/Installing-python-2.7-on-centos-6.3.-Follow-this-sequence-exactly-for-centos-machine-only#how-to-install-python-276-on-centos-63-62-and-64-okay-too-probably-others).
 
-Make sure you are in the `mesos-integration/MMC_PARCEL-1.0/` directory.
+Make sure you are in the `mesos-integration/MMC_PARCEL-1.1/` directory.
 
 ```
 		# package with Maven
         mvn package
 ```
 
-You will find the result of the packaging in the `MMC_PARCEL-1.0/target` directory. The files needed are:
+You will find the result of the packaging in the `MMC_PARCEL-1.1/target` directory. The files needed are:
 
 * manifest.json
-* MESOS-1.0-el6.parcel
-* MESOS-1.0.jar
+* MESOS-1.1-el6.parcel
+* MESOS-1.1.jar
 
 #### 3 Package Docker parcel
 
 To package the parcels correctly `Python 2.7` and `Maven` must be installed. To know how to install `Python 2.7` on CentOS 6.5 refer to this [link](https://github.com/h2oai/h2o/wiki/Installing-python-2.7-on-centos-6.3.-Follow-this-sequence-exactly-for-centos-machine-only#how-to-install-python-276-on-centos-63-62-and-64-okay-too-probably-others).
-Make sure you are in the `mesos-integration/DOCKER_PARCEL-1.0/` directory.
+Make sure you are in the `mesos-integration/DOCKER_PARCEL-1.1/` directory.
 
 #### 3.1 Enter directory and package parcel
 
@@ -238,11 +269,11 @@ Make sure you are in the `mesos-integration/DOCKER_PARCEL-1.0/` directory.
         mvn package
 ```
 
-You will find the result of the packaging in the `DOCKER_PARCEL-1.0/target` directory. The files needed are:
+You will find the result of the packaging in the `DOCKER_PARCEL-1.1/target` directory. The files needed are:
 
 * manifest.json
-* DOCKER-1.0-el6.parcel
-* DOCKER-1.0.jar
+* DOCKER-1.1-el6.parcel
+* DOCKER-1.1.jar
 
 #### 4 Make the parcel available to Cloudera Manager
 
@@ -270,8 +301,8 @@ Now you will be able to add the services to your cluster, just like you would I.
 
 * In Cloudera Manager, point the parcel URL to http://bigindustries.be/parcels/
 * Download - distrubute and activate the parcel
-* Download the [Docker CSD file](http://bigindustries.be/parcels/DOCKER-1.0.jar)
-* Download the [Mesos CSD file](http://bigindustries.be/parcels/MESOS-1.0.jar)
+* Download the [Docker CSD file](http://bigindustries.be/parcels/DOCKER-1.1.jar)
+* Download the [Mesos CSD file](http://bigindustries.be/parcels/MESOS-1.1.jar)
 
 These jar file(s) need to be added to the CSD directory on the CM host machine. By default this directory is located at `/opt/cloudera/csd`.
 

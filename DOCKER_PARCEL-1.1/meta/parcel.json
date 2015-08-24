@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "name": "DOCKER",
+  "version": "1.1",
+  "setActiveSymlink": true,
+
+  "depends": "",
+  "replaces": "DOCKER",
+  "conflicts": "",
+
+  "provides": [
+    "docker"
+  ],
+  "scripts": {
+    "defines": "docker_env.sh"
+  },
+  "packages": [
+    { "name"   : "docker",
+      "version": "1.1"
+    }
+  ],
+  "components": [
+    { "name"       : "docker",
+      "version"    : "1.1",
+      "pkg_version": "1.1"
+    }
+  ],
+  "users": {
+    "docker": {
+      "longname"    : "Docker user",
+      "home"        : "/var/lib/docker",
+      "shell"       : "/bin/bash",
+      "extra_groups": [ "docker" ]
+    }
+  },
+  "groups": [
+    "docker"
+  ]
+}

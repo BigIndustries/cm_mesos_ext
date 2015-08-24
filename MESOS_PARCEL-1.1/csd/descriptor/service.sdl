@@ -1,0 +1,351 @@
+{
+    "name": "MESOS",
+    "label": "Mesos",
+    "description": "Parcel containing Mesos, Marathon and Mesos DNS",
+    "version": "1.1",
+    "icon": "images/icon.png",
+    "parcel": {
+        "requiredTags": [
+            "mesos"
+        ]
+    },
+    "runAs": {
+        "user": "mesos",
+        "group": "mesos"
+    },
+    "serviceDependencies": [
+        {
+            "name": "ZOOKEEPER",
+            "required": "true"
+        }
+    ],
+    "roles": [
+            {
+            "name": "MESOS_MASTER_SERVER",
+            "label": "Mesos Master Server",
+            "pluralLabel": "Mesos Master Servers",
+            "parameters": [
+                {
+                    "name": "mesos_master_port_num",
+                    "label": "Mesos master server port",
+                    "description": "The port where the mesos master listens on",
+                    "required": "true",
+                    "type": "port",
+                    "default": 5050,
+                    "configurableInWizard" : true
+                },
+                {
+                    "name": "mesos_quorum_num",
+                    "label": "Mesos quorum",
+                    "description": "The amount of quorums",
+                    "required": "true",
+                    "type": "long",
+                    "default": 2,
+                    "configurableInWizard" : true
+                }
+            ],
+            "startRunner": {
+                "program": "scripts/script.sh",
+                "args": [
+                    "start-master"
+                ],
+                "environmentVariables": {
+                    "MESOS_MASTER_PORT_NR": "${mesos_master_port_num}",
+                    "MESOS_QUORUM_NR": "${mesos_quorum_num}"
+                }
+            }
+        },
+        {
+            "name": "MESOS_SLAVE_SERVER",
+            "label": "Mesos Slave Server",
+            "pluralLabel": "Mesos Slave Servers",
+            "parameters": [
+                {
+                    "name": "mesos_slave_port_num",
+                    "label": "Mesos slave server port",
+                    "description": "The port where the mesos slave listens on",
+                    "required": "true",
+                    "type": "port",
+                    "default": 5051,
+                    "configurableInWizard" : true
+                }
+            ],
+            "startRunner": {
+                "program": "scripts/script.sh",
+                "args": [
+                    "start-slave"
+                ],
+                "environmentVariables": {
+                    "MESOS_SLAVE_PORT_NR": "${mesos_slave_port_num}"
+                }
+            }
+        },
+        {
+            "name": "MESOS_MARATHON",
+            "label": "Marathon server",
+            "pluralLabel": "Marathon servers",
+            "parameters": [
+                                         {
+                                            "name": "marathon_port_num",
+                                            "label": "marathon port",
+                                            "description": "The port where marathon listens on",
+                                            "required": "true",
+                                            "type": "port",
+                                            "default": 8080,
+                                            "configurableInWizard" : true
+                                         }
+                         ],
+            "startRunner": {
+                "program": "scripts/script.sh",
+                "args": [
+                    "start-marathon"
+               ],
+                 "environmentVariables": {
+                     "CM_MARATHON_PORT_NR": "${marathon_port_num}"
+                 }
+            },
+            "topology": {
+                "minInstances": "0"
+            }
+        },
+        {
+            "name": "MESOS_DNS",
+            "label": "Mesos DNS",
+            "pluralLabel": "Mesos DNS servers",
+            "parameters": [
+                           {
+                               "name": "mesosdns_conf_masters",
+                               "label": "Mesos Masters",
+                               "description": "Masters is a comma separated list with the IP address and port number for the master(s) in the Mesos cluster. Mesos-DNS will automatically find the leading master at any point in order to retrieve state about running tasks. If there is no leading master or the leading master is not responsive, Mesos-DNS will continue serving DNS requests based on stale information about running tasks. The masters field is required. ",
+                               "required": "true",
+                               "type": "string",
+                               "default": "[\"10.100.55.10:5050\", \"10.100.55.9:5050\"]",
+                               "configurableInWizard" : true
+                           },
+{
+                               "name": "mesosdns_conf_refreshseconds",
+                               "label": "DNS update (in seconds)",
+                               "description": "refreshSeconds is the frequency at which Mesos-DNS updates DNS records based on information retrieved from the Mesos master. The default value is 60 seconds.",
+                               "required": "true",
+                               "type": "string",
+                               "default": "60",
+                               "configurableInWizard" : true
+                           },
+{
+                               "name": "mesosdns_conf_ttl",
+                               "label": "DNS record ttl",
+                               "description": "ttl is the time to live value for DNS records served by Mesos-DNS, in seconds. It allows caching of the DNS record for a period of time in order to reduce DNS request rate. ttl should be equal or larger than refreshSeconds. The default value is 60 seconds. ",
+                               "required": "true",
+                               "type": "string",
+                               "default": "60",
+                               "configurableInWizard" : true
+                           },
+{
+                               "name": "mesosdns_conf_domain",
+                               "label": "Mesos cluster domain name",
+                               "description": "domain is the domain name for the Mesos cluster. The domain name can use characters [a-z, A-Z, 0-9], - if it is not the first or last character of a domain portion, and . as a separator of the textual portions of the domain name. We recommend you avoid valid top-level domain names. The default value is mesos.",
+                               "required": "true",
+                               "type": "string",
+                               "default": "mesos",
+                               "configurableInWizard" : true
+                           },
+{
+                               "name": "mesosdns_conf_ns",
+                               "label": "NS",
+                               "description": "ns is the namespace used.",
+                               "required": "true",
+                               "type": "string",
+                               "default": "ns1",
+                               "configurableInWizard" : true
+                           },
+{
+                               "name": "mesosdns_conf_port",
+                               "label": "Mesos DNS port",
+                               "description": "port is the port number that Mesos-DNS monitors for incoming DNS requests. Requests can be sent over TCP or UDP. We recommend you use port 53 as several applications assume that the DNS server listens to this port. The default value is 53.",
+                               "required": "true",
+                               "type": "port",
+                               "default": 5353,
+                               "configurableInWizard" : true
+                           },
+{
+                               "name": "mesosdns_conf_resolvers",
+                               "label": "List of resolvers",
+                               "description": "resolvers is a comma separated list with the IP addresses of external DNS servers that Mesos-DNS will contact to resolve any DNS requests outside the domain. We recommend that you list the nameservers specified in the /etc/resolv.conf on the server Mesos-DNS is running. Alternatively, you can list 8.8.8.8, which is the Google public DNS address. The resolvers field is required. ",
+                               "required": "true",
+                               "type": "string",
+
+                               "default": "[\"8.8.8.8\"]",
+                               "configurableInWizard" : true
+                           },
+{
+                               "name": "mesosdns_conf_timeout",
+                               "label": "DNS request timeout",
+                               "description": "timeout is the timeout threshold, in seconds, for connections and requests to external DNS requests. The default value is 5 seconds. ",
+                               "required": "true",
+                               "type": "string",
+                               "default": "5",
+                               "configurableInWizard" : true
+                           },
+{
+                               "name": "mesosdns_conf_listener",
+                               "label": "Mesos DNS listener",
+                               "description": "listener is the IP address of Mesos-DNS. In SOA replies, Mesos-DNS identifies hostname mesos-dns.domain as the primary nameserver for the domain. It uses this IP address in an A record for mesos-dns.domain. The default value is \"0.0.0.0\", which instructs Mesos-DNS to create an A record for every IP address associated with a network interface on the server that runs the Mesos-DNS process.",
+                               "required": "true",
+                               "type": "string",
+                               "default": "0.0.0.0",
+                               "configurableInWizard" : true
+                           },
+{
+                               "name": "mesosdns_conf_soamname",
+                               "label": "SOAM Name",
+                               "description": "SOAMname is the MNAME field in the SOA record for the Mesos domain. The format is mailbox.domain, using a . instead of @. For example, if the email address is root@ns1.mesos, the email field should be root.mesos-dns.mesos. For details, see the RFC-1035. The default value is root.ns1.mesos. NOTE: NS and DOMAIN will be appended by this parcel. so in this example 'root' will do.'",
+                               "required": "true",
+                               "type": "string",
+                               "default": "root",
+                               "configurableInWizard" : true
+                           },
+{
+                               "name": "mesosdns_conf_soarefresh",
+                               "label": "SOA Refresh",
+                               "description": "SOARefresh is the REFRESH field in the SOA record for the Mesos domain. For details, see the RFC-1035. The default value is 60.",
+                               "required": "true",
+                               "type": "string",
+                               "default": "60",
+                               "configurableInWizard" : true
+                           },
+{
+                               "name": "mesosdns_conf_soaretry",
+                               "label": "SOA Retry",
+                               "description": "SOARetry is the RETRY field in the SOA record for the Mesos domain. For details, see the RFC-1035. The default value is 600.",
+                               "required": "true",
+                               "type": "string",
+                               "default": 600,
+                               "configurableInWizard" : true
+                           },
+{
+                               "name": "mesosdns_conf_soaexpire",
+                               "label": "SOA Expire",
+                               "description": "SOAExpire is the EXPIRE field in the SOA record for the Mesos domain. For details, see the RFC-1035. The default value is 86400.",
+                               "required": "true",
+                               "type": "string",
+                               "default": "86400",
+                               "configurableInWizard" : true
+                           },
+{
+                               "name": "mesosdns_conf_soaminttl",
+                               "label": "SOAM in TTL",
+                               "description": "SOAMinttl is the minimum TTL field in the SOA record for the Mesos domain. For details, see the RFC-2308. The default value is 60.",
+                               "required": "true",
+                               "type": "string",
+                               "default": "60",
+                               "configurableInWizard" : true
+                           },
+{
+                               "name": "mesosdns_conf_dnson",
+                               "label": "Mesos DNS on",
+                               "description": "dnson is a boolean field that controls whether Mesos-DNS listens for DNS requests or not. The default value is true. ",
+                               "required": "true",
+                               "type": "boolean",
+                               "default": "true",
+                               "configurableInWizard" : true
+                           },
+{
+                               "name": "mesosdns_conf_httpon",
+                               "label": "HTTP on",
+                               "description": "httpon is a boolean field that controls whether Mesos-DNS listens for HTTP requests or not. The default value is true.",
+                               "required": "true",
+                               "type": "boolean",
+                               "default": "true",
+                               "configurableInWizard" : true
+                           },
+{
+                               "name": "mesosdns_conf_httpport",
+                               "label": "HTTP Port",
+                               "description": "httpport is the port number that Mesos-DNS monitors for incoming HTTP requests. The default value is 8123.",
+                               "required": "true",
+                               "type": "port",
+                               "default": 8123,
+                               "configurableInWizard" : true
+                           },
+{
+                               "name": "mesosdns_conf_externalon",
+                               "label": "External on",
+                               "description": "externalon is a boolean field that controls whether Mesos-DNS serves requests outside of the Mesos domain. The default value is true.",
+                               "required": "true",
+                               "type": "boolean",
+                               "default": "true",
+                               "configurableInWizard" : true
+                           },
+{
+                               "name": "mesosdns_conf_recurseon",
+                               "label": "Recurse on",
+                               "description": "recurseon controls if the DNS replies for names in the Mesos domain will indicate that recursion is available. The default value is true.",
+                               "required": "true",
+                               "type": "boolean",
+                               "default": "true",
+                               "configurableInWizard" : true
+                           }
+                       ],
+            "startRunner": {
+                "program": "scripts/script.sh",
+                "args": [
+                    "start-mesos-dns"
+                ],
+                "environmentVariables": {
+                    "MESOSDNS_CONF_MASTERS": "${mesosdns_conf_masters}",
+                    "MESOSDNS_CONF_REFRESHSECONDS": "${mesosdns_conf_refreshseconds}",
+                    "MESOSDNS_CONF_TTL": "${mesosdns_conf_ttl}",
+                    "MESOSDNS_CONF_DOMAIN": "${mesosdns_conf_domain}",
+                    "MESOSDNS_CONF_NS": "${mesosdns_conf_ns}",
+                    "MESOSDNS_CONF_PORT": "${mesosdns_conf_port}",
+                    "MESOSDNS_CONF_RESOLVERS": "${mesosdns_conf_resolvers}",
+                    "MESOSDNS_CONF_TIMEOUT": "${mesosdns_conf_timeout}",
+                    "MESOSDNS_CONF_LISTENER": "${mesosdns_conf_listener}",
+                    "MESOSDNS_CONF_SOAMNAME": "${mesosdns_conf_soamname}",
+                    "MESOSDNS_CONF_SOAREFRESH": "${mesosdns_conf_soarefresh}",
+                    "MESOSDNS_CONF_SOARETRY": "${mesosdns_conf_soaretry}",
+                    "MESOSDNS_CONF_SOAEXPIRE": "${mesosdns_conf_soaexpire}",
+                    "MESOSDNS_CONF_SOAMINTTL": "${mesosdns_conf_soaminttl}",
+                    "MESOSDNS_CONF_DNSON": "${mesosdns_conf_dnson}",
+                    "MESOSDNS_CONF_HTTPON": "${mesosdns_conf_httpon}",
+                    "MESOSDNS_CONF_HTTPPORT": "${mesosdns_conf_httpport}",
+                    "MESOSDNS_CONF_EXTERNALON": "${mesosdns_conf_externalon}",
+                    "MESOSDNS_CONF_RECURSEON": "${mesosdns_conf_recurseon}"
+                }
+            },
+            "topology": {
+                "minInstances": "0"
+            }
+        }
+    ],
+    "stopRunner": {
+        "relevantRoleTypes" : ["MESOS_MARATHON"],
+        "runner": {
+            "program": "scripts/script.sh",
+            "args": [
+                "stop-marathon"
+            ]
+        },
+        "masterRole": "MESOS_MARATHON"
+    },
+    "stopRunner": {
+        "relevantRoleTypes" : ["MESOS_MASTER_SERVER"],
+        "runner": {
+            "program": "scripts/script.sh",
+            "args": [
+                "stop-master"
+            ]
+        },
+        "masterRole": "MESOS_MASTER_SERVER"
+    },
+    "stopRunner": {
+        "relevantRoleTypes" : ["MESOS_SLAVE_SERVER"],
+        "runner": {
+            "program": "scripts/script.sh",
+            "args": [
+                "stop-slave"
+            ]
+        },
+        "masterRole": "MESOS_SLAVE_SERVER"
+    }
+}

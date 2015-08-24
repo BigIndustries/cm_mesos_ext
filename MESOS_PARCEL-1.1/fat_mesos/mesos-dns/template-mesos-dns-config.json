@@ -1,0 +1,23 @@
+{
+  "zk": "zk://####zookeeper####/mesos",
+  "masters": ####masters####,
+  "refreshSeconds": ####refreshSeconds####,
+  "ttl": ####ttl####,
+  "domain": "####domain####",
+  "ns": "####ns####",
+  "port": ####port####,
+  "resolvers": ####resolvers####,
+  "timeout": ####timeout####,
+  "listener": "####listener####",
+  "SOAMname": "####SOAMname####",
+  "SOARname": "####SOARname####",
+  "SOARefresh": ####SOARefresh####,
+  "SOARetry":   ####SOARetry####,
+  "SOAExpire":  ####SOAExpire####,
+  "SOAMinttl": ####SOAMinttl####,
+  "dnson": ####dnson####,
+  "httpon": ####httpon####,
+  "httpport": ####httpport####,
+  "externalon": ####externalon####,
+  "recurseon": ####recurseon####
+}
